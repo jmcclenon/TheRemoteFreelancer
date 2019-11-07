@@ -1,0 +1,25 @@
+{% assign current_section = "!" %}
+<div class="underline-table">
+        {% for listing in site.data.sites %}
+        {% if include.filter == undefined or listing.hiringtype contains include.filter %}
+        {% if current_section != listing.section %}
+        {% assign current_section = listing.section %}
+        <h2 class="section-title">{{current_section}}</h2>
+        {% endif %}
+        <div class="site-card row">
+            <div class="column left">
+                <div>
+                    <h3><img src="/icons/{{listing.netloc}}.ico" class="favicon"/><a href="{% if listing.affiliate_link %}{{ listing.affiliate_link }}{% else %}{{listing.url}}{% endif %}">{{listing.name}}</a>
+                    </h3>
+                    <h4><small>Alexa Rank</small>{{listing.rank}}</h4>
+                </div>
+            </div>
+            <div class="column right">
+                    <div>
+                    <span>{{listing.sdescription}}</span>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+</div>
